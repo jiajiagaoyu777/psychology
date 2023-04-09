@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whlg.psychology.mapper.DoctorMapper">
+
+
+    <resultMap id="DoctorResultMap" type="com.whlg.psychology.entity.Doctor">
+        <id column="doctor_id" property="doctor_id"></id>
+        <result column="created_user" property="createdUser"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="change_user" property="changeUser"></result>
+        <result column="change_user" property="changeUser"></result>
+    </resultMap>
+
+    <insert id="insertDoctor">
+        insert into psychology.p_doctor (doctor_name, doctor_pwd, salt, doctor_avatar, certificate,is_doctor,created_user, created_time, change_user, change_time)
+        values (#{doctor_name},#{doctor_pwd},#{salt},#{doctor_avatar},#{certificate},#{is_doctor},#{createdUser},#{createdTime},#{changeUser},#{changeTime})
+    </insert>
+
+    <select id="findByDoctorname" resultType="com.whlg.psychology.entity.Doctor">
+        select * from psychology.p_doctor where doctor_name=#{doctor_name};
+    </select>
+
+    <update id="updateDoctorPwd">
+        update psychology.p_doctor set doctor_pwd=#{doctor_pwd},change_user=#{changeUser},change_time=#{changeTime} where doctor_id=#{doctor_id}
+    </update>
+
+
+    <select id="findByDoctorId" resultMap="DoctorResultMap">
+        select * from psychology.p_doctor where doctor_id=#{doctor_id}
+    </select>
+
+    <!--    <update id="updateInfo">-->
+    <!--        update graduationdemo.s_user-->
+    <!--        set-->
+    <!--        <if test="phone != null and phone != '' ">phone=#{phone},</if>-->
+    <!--        <if test="sex != null and sex != '' ">sex=#{sex},</if>-->
+    <!--        <if test="email != null and email != '' ">email=#{email},</if>-->
+    <!--        change_user=#{changeUser},change_time=#{changeTime} where uid=#{uid}-->
+    <!--    </update>-->
+
+    <update id="updateDoctorAvatar">
+        update psychology.p_doctor
+        set doctor_avatar=#{avatar},change_user=#{changeUser},change_time=#{changeTime}
+        where doctor_id=#{doctor_id}
+    </update>
+
+</mapper>

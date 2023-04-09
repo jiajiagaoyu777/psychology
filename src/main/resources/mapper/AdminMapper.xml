@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whlg.psychology.mapper.AdminMapper">
+
+    <resultMap id="AdminResultMap" type="com.whlg.psychology.entity.Admin">
+        <id column="admin_id" property="admin_id"></id>
+        <result column="created_user" property="createdUser"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="change_user" property="changeUser"></result>
+        <result column="change_user" property="changeUser"></result>
+    </resultMap>
+
+    <insert id="insertAdmin">
+        insert into psychology.p_admin (admin_name, admin_pwd, salt, admin_avatar, created_user, created_time, change_user, change_time)
+        values (#{admin_name},#{admin_pwd},#{salt},#{admin_avatar},#{createdUser},#{createdTime},#{changeUser},#{changeTime})
+    </insert>
+
+    <select id="findByAdminName" resultMap="AdminResultMap">
+        select * from psychology.p_admin where admin_name=#{admin_name};
+    </select>
+
+
+        <update id="updateAdminPwd">
+            update psychology.p_admin set admin_pwd=#{admin_pwd},change_user=#{changeUser},change_time=#{changeTime} where admin_id=#{admin_id}
+        </update>
+
+
+        <select id="findByAdminId" resultMap="AdminResultMap">
+            select * from psychology.p_admin where admin_id=#{admin_id}
+        </select>
+
+    <!--    <update id="updateInfo">-->
+    <!--        update graduationdemo.s_user-->
+    <!--        set-->
+    <!--        <if test="phone != null and phone != '' ">phone=#{phone},</if>-->
+    <!--        <if test="sex != null and sex != '' ">sex=#{sex},</if>-->
+    <!--        <if test="email != null and email != '' ">email=#{email},</if>-->
+    <!--        change_user=#{changeUser},change_time=#{changeTime} where uid=#{uid}-->
+    <!--    </update>-->
+
+        <update id="updateAdminAvatar">
+            update psychology.p_admin
+            set admin_avatar=#{avatar},change_user=#{changeUser},change_time=#{changeTime}
+            where admin_id=#{admin_id}
+        </update>
+</mapper>

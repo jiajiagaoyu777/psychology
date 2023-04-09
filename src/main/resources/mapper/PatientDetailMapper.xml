@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whlg.psychology.mapper.PatientDetailMapper">
+
+    <insert id="insertPatientDetail">
+        insert into psychology.patient_detail (patient_name, phone, birthday, sex, education, job, history)
+        values (#{patient_name},#{phone},#{birthday},#{sex},#{education},#{job},#{history})
+    </insert>
+
+</mapper>
